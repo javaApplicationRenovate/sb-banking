@@ -25,6 +25,7 @@ pipeline {
                     sh "docker buildx build --tag ${ENTERPRISE_CONTAINER_BUILD_REPO}/${COMPONENT_NAME}:${BUILD_NUMBER} ."
                     sh "docker login -u ${USERNAME} -p ${PASSWORD} ${ENTERPRISE_CONTAINER_BUILD_REPO}"
                     sh "docker push ${ENTERPRISE_CONTAINER_BUILD_REPO}/${COMPONENT_NAME}:${BUILD_NUMBER}"
+                    sh "docker images"
                   }
               }
             }
@@ -32,7 +33,7 @@ pipeline {
         stage('Generate Application SBOM') {
             steps{
               script{
-                    env.ENTERPRISE_CONTAINER_BUILD_REPO = "localhost"
+                    env.ENTERPRISE_CONTAINER_BUILD_REPO = "localhost:5000"
                     env.CONCERT_URL = "https://annie-concert1.fyre.ibm.com:12443"
                     env.CONCERT_USERNAME = "ibmconcert"
                     env.CONCERT_PASSWORD = "password"
