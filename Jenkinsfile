@@ -42,7 +42,6 @@ pipeline {
                     println "CONTAINER_BIN: ${CONTAINER_BIN}"
                     println "GIT_BIN: ${GIT_BIN}"
                     println "DIR_FILES: ${DIR_FILES}"
-                    println "DOCKER_HOST: ${DOCKER_HOST}"
                     sh "/var/lib/jenkins/lib/concert_ctl_python --app --env"
               }
           }
