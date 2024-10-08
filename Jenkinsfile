@@ -15,7 +15,7 @@ pipeline {
                 sh '''
                 ls -al && pwd
                 ./mvnw clean install -DskipTests=true
-                docker build -t "spring-boot-banking:latest" .
+                docker build -t "sb-banking:latest" .
                 docker images
                 '''
             }
