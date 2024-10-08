@@ -39,6 +39,7 @@ pipeline {
                     env.CONCERT_PASSWORD = "password"
                     env.CONCERTCTL_CMDB_URL = "http://127.0.0.1:8000/api"
 
+                    println("testing auto build - disabled")
                     println "Build WORKSPACE ${WORKSPACE}"
                     println "JOB_NAME ${JOB_NAME}"
                     println "GIT_URL: ${GIT_URL}"
