@@ -2,6 +2,10 @@ pipeline {
     agent any
     environment {
         CI = 'true'
+        CODE_SOURCE_DIR_IN_WORKSPACE="src"
+        CONTAINER_BIN="docker"
+        GIT_BIN="git"
+        DIR_FILES="data"
     }
     stages {
         stage('Build') {
