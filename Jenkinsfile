@@ -38,7 +38,11 @@ pipeline {
         stage('Generate Application SBOM') {
             steps{
               script{
-                  sh "/var/lib/jenkins/lib/concert_ctl_python --app --env"
+                    env.ENTERPRISE_CONTAINER_BUILD_REPO = "localhost"
+                    env.CONCERT_URL = "https://annie-concert1.fyre.ibm.com:12443"
+                    env.CONCERT_USERNAME = "ibmconcert"
+                    env.CONCERT_PASSWORD = "password"
+                    sh "/var/lib/jenkins/lib/concert_ctl_python --app --env"
               }
           }
         }
