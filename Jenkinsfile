@@ -27,6 +27,7 @@ pipeline {
                     sh "docker push ${ENTERPRISE_CONTAINER_BUILD_REPO}/${COMPONENT_NAME}:${BUILD_NUMBER}"
                   }
               }
+            }
         }
         stage('Generate Application SBOM') {
             steps{
