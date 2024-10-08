@@ -11,6 +11,7 @@ pipeline {
         stage('Build') {
             steps {
                 println "Build WORKSPACE ${WORKSPACE}"
+                println "JOB_NAME ${JOB_NAME}"
                 sh '''
                 ls -al && pwd
                 ./mvnw clean install -DskipTests=true
