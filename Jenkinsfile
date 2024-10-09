@@ -9,14 +9,6 @@ pipeline {
     }
     stages {
         stage('Build') {
-            // steps {
-            //     sh '''
-            //     ls -al && pwd
-            //     ./mvnw clean install -DskipTests=true
-            //     docker build -t "sb-banking:${BUILD_NUMBER}" .
-            //     docker images
-            //     '''
-            // }
             steps{
               script{
                   withCredentials([usernamePassword(credentialsId: "${DOCKER_REPO_CREDENTIALS}", usernameVariable: 'USERNAME', passwordVariable: 'PASSWORD')]) {
@@ -26,8 +18,8 @@ pipeline {
                     sh "docker login -u ${USERNAME} -p ${PASSWORD} ${ENTERPRISE_CONTAINER_BUILD_REPO}"
                     sh "docker push ${ENTERPRISE_CONTAINER_BUILD_REPO}/${COMPONENT_NAME}:${BUILD_NUMBER}"
                     sh "docker images"
-                  }
-              }
+                    }
+                }
             }
         }
         stage('Generate Application SBOM') {
