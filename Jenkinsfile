@@ -22,28 +22,5 @@ pipeline {
                 }
             }
         }
-        stage('Generate Application SBOM') {
-            steps{
-              script{
-                    env.ENTERPRISE_CONTAINER_BUILD_REPO = "localhost:5000"
-                    env.CONCERT_URL = "https://annie-concert1.fyre.ibm.com:12443"
-                    env.CONCERT_USERNAME = "ibmconcert"
-                    env.CONCERT_PASSWORD = "password"
-                    env.CONCERTCTL_CMDB_URL = "http://127.0.0.1:8000/api"
-
-                    println("testing auto build - disabled")
-                    println "Build WORKSPACE ${WORKSPACE}"
-                    println "JOB_NAME ${JOB_NAME}"
-                    println "GIT_URL: ${GIT_URL}"
-                    println "WORKSPACE: ${WORKSPACE}"
-                    println "BUILD_NUMBER: ${BUILD_NUMBER}"
-                    println "CODE_SOURCE_DIR_IN_WORKSPACE: ${CODE_SOURCE_DIR_IN_WORKSPACE}"
-                    println "ENTERPRISE_CONTAINER_BUILD_REPO: ${ENTERPRISE_CONTAINER_BUILD_REPO}"
-                    println "CI_ENV_TARGET: ${CI_ENV_TARGET}"
-                    println "CONCERT_URL: ${CONCERT_URL}"
-                    sh "/var/lib/jenkins/lib/concert_ctl_python --app --env"
-              }
-          }
-        }
     }
 }
