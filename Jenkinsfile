@@ -41,13 +41,6 @@ pipeline {
                     println "ENTERPRISE_CONTAINER_BUILD_REPO: ${ENTERPRISE_CONTAINER_BUILD_REPO}"
                     println "CI_ENV_TARGET: ${CI_ENV_TARGET}"
                     println "CONCERT_URL: ${CONCERT_URL}"
-                    println "CONCERT_INSTANCE_ID: ${CONCERT_INSTANCE_ID}"
-                    println "CONCERTCTL_CMDB_URL: ${CONCERTCTL_CMDB_URL}"
-                    println "CONCERT_USERNAME: ${CONCERT_USERNAME}"
-                    println "CONCERT_PASSWORD: ${CONCERT_PASSWORD}"
-                    println "CONTAINER_BIN: ${CONTAINER_BIN}"
-                    println "GIT_BIN: ${GIT_BIN}"
-                    println "DIR_FILES: ${DIR_FILES}"
                     sh "/var/lib/jenkins/lib/concert_ctl_python --app --env"
               }
           }
