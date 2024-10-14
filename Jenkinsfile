@@ -37,7 +37,14 @@ pipeline {
         stage('Generate Application SBOM') {
             steps{
                 script{
-                    sh "/var/lib/jenkins/lib/concert_ctl_python --app --env"
+                    sh "/var/lib/jenkins/lib/concert_ctl_command --app --env"
+                }
+            }
+        }
+        stage('Generate Image Scan report') {
+            steps{
+                script{
+                    sh "/var/lib/jenkins/lib/concert_ctl_command --env --image_scan"
                 }
             }
         }
