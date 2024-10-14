@@ -48,6 +48,20 @@ pipeline {
                 }
             }
         }
+        stage('Generate Build SBOM') {
+            steps{
+                script{
+                    sh "/var/lib/jenkins/lib/concert_ctl_command_package --env --build"
+                }
+            }
+        }
+        stage('Generate Deploy SBOM') {
+            steps{
+                script{
+                    sh "/var/lib/jenkins/lib/concert_ctl_command_package --env --deploy"
+                }
+            }
+        }
         stage('Generate Package SBOM') {
             steps{
                 script{
