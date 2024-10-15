@@ -44,28 +44,28 @@ pipeline {
         stage('Generate Build SBOM') {
             steps{
                 script{
-                    sh "/var/lib/jenkins/lib/concert-ctl-python --build"
+                    sh "/var/lib/jenkins/lib/concert-ctl-python --build --env"
                 }
             }
         }
         stage('Generate Deploy SBOM') {
             steps{
                 script{
-                    sh "/var/lib/jenkins/lib/concert-ctl-python --deploy"
+                    sh "/var/lib/jenkins/lib/concert-ctl-python --deploy --env"
                 }
             }
         }
         stage('Generate Image Scan report') {
             steps{
                 script{
-                    sh "/var/lib/jenkins/lib/concert-ctl-python --image_scan"
+                    sh "/var/lib/jenkins/lib/concert-ctl-python --image_scan --env"
                 }
             }
         }
         stage('Generate Package SBOM') {
             steps{
                 script{
-                    sh "/var/lib/jenkins/lib/concert-ctl-python --package --image"
+                    sh "/var/lib/jenkins/lib/concert-ctl-python --package --image --env"
                 }
             }
         }
