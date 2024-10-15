@@ -21,53 +21,5 @@ pipeline {
                 }
             }
         }
-        stage('Test concertCtl and set environment') {
-            steps{
-                script{      
-
-                  withCredentials([usernamePassword(credentialsId: "CONCERT_CREDENTIALS", usernameVariable: 'USERNAME', passwordVariable: 'PASSWORD')]) {
-                    env.CONCERT_USERNAME="${USERNAME}"
-                    env.CONCERT_PASSWORD="${PASSWORD}"    
-                    sh "/var/lib/jenkins/lib/concert-ctl-python -e"
-
-                  }
-              }
-            }
-        }
-        stage('Generate Application SBOM') {
-            steps{
-                script{
-                    sh "/var/lib/jenkins/lib/concert-ctl-python --app"
-                }
-            }
-        }
-        stage('Generate Build SBOM') {
-            steps{
-                script{
-                    sh "/var/lib/jenkins/lib/concert-ctl-python --build"
-                }
-            }
-        }
-        stage('Generate Deploy SBOM') {
-            steps{
-                script{
-                    sh "/var/lib/jenkins/lib/concert-ctl-python --deploy"
-                }
-            }
-        }
-        stage('Generate Image Scan report') {
-            steps{
-                script{
-                    sh "/var/lib/jenkins/lib/concert-ctl-python --image_scan"
-                }
-            }
-        }
-        stage('Generate Package SBOM') {
-            steps{
-                script{
-                    sh "/var/lib/jenkins/lib/concert-ctl-python --package --image"
-                }
-            }
-        }
     }
 }
