@@ -66,19 +66,19 @@ pipeline {
             steps{
                 script{
                     catchError(buildResult: 'SUCCESS', stageResult: 'UNSTABLE'){
-                        sh "/var/lib/jenkins/lib/go-concertctl --image_scan"
-                    }
-                }
-            }
-        }
-        stage('Generate Package SBOM') {
-            steps{
-                script{
-                    catchError(buildResult: 'SUCCESS', stageResult: 'UNSTABLE'){
                         sh "/var/lib/jenkins/lib/go-concertctl --image"
                     }
                 }
             }
         }
+        // stage('Generate Package SBOM') {
+        //     steps{
+        //         script{
+        //             catchError(buildResult: 'SUCCESS', stageResult: 'UNSTABLE'){
+        //                 sh "/var/lib/jenkins/lib/go-concertctl --image"
+        //             }
+        //         }
+        //     }
+        // }
     }
 }
