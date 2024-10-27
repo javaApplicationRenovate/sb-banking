@@ -16,9 +16,7 @@ pipeline {
                     sh "./mvnw clean install -DskipTests=true" 
                     sh "docker buildx build --tag ${ENTERPRISE_CONTAINER_BUILD_REPO}/${COMPONENT_NAME}:${BUILD_NUMBER} ."
                     // sh "docker login -u ${USERNAME} -p ${PASSWORD} ${ENTERPRISE_CONTAINER_BUILD_REPO}"
-                    // Docker login with password piped securely
                     sh "echo ${PASSWORD} | docker login -u ${USERNAME} --password-stdin ${ENTERPRISE_CONTAINER_BUILD_REPO}"
-
                     sh "docker push ${ENTERPRISE_CONTAINER_BUILD_REPO}/${COMPONENT_NAME}:${BUILD_NUMBER}"
                     }
                 }
@@ -37,50 +35,50 @@ pipeline {
                 }
             }
         }
-        // stage('Generate Application SBOM') {
-        //     steps{
-        //         script{
-        //             catchError(buildResult: 'SUCCESS', stageResult: 'UNSTABLE'){
-        //                 sh "/var/lib/jenkins/lib/concert-ctl-python --app"
-        //             }
-        //         }
-        //     }
-        // }
-        // stage('Generate Build SBOM') {
-        //     steps{
-        //         script{
-        //             catchError(buildResult: 'SUCCESS', stageResult: 'UNSTABLE'){
-        //                 sh "/var/lib/jenkins/lib/concert-ctl-python --build"
-        //             }
-        //         }
-        //     }
-        // }
-        // stage('Generate Deploy SBOM') {
-        //     steps{
-        //         script{
-        //             catchError(buildResult: 'SUCCESS', stageResult: 'UNSTABLE'){
-        //                 sh "/var/lib/jenkins/lib/concert-ctl-python --deploy"
-        //             }
-        //         }
-        //     }
-        // }
-        // stage('Generate Image Scan report') {
-        //     steps{
-        //         script{
-        //             catchError(buildResult: 'SUCCESS', stageResult: 'UNSTABLE'){
-        //                 sh "/var/lib/jenkins/lib/concert-ctl-python --image_scan"
-        //             }
-        //         }
-        //     }
-        // }
-        // stage('Generate Package SBOM') {
-        //     steps{
-        //         script{
-        //             catchError(buildResult: 'SUCCESS', stageResult: 'UNSTABLE'){
-        //                 sh "/var/lib/jenkins/lib/concert-ctl-python --image"
-        //             }
-        //         }
-        //     }
-        // }
+        stage('Generate Application SBOM') {
+            steps{
+                script{
+                    catchError(buildResult: 'SUCCESS', stageResult: 'UNSTABLE'){
+                        sh "/var/lib/jenkins/lib/go-concertctl --app"
+                    }
+                }
+            }
+        }
+        stage('Generate Build SBOM') {
+            steps{
+                script{
+                    catchError(buildResult: 'SUCCESS', stageResult: 'UNSTABLE'){
+                        sh "/var/lib/jenkins/lib/go-concertctl --build"
+                    }
+                }
+            }
+        }
+        stage('Generate Deploy SBOM') {
+            steps{
+                script{
+                    catchError(buildResult: 'SUCCESS', stageResult: 'UNSTABLE'){
+                        sh "/var/lib/jenkins/lib/go-concertctl --deploy"
+                    }
+                }
+            }
+        }
+        stage('Generate Image Scan report') {
+            steps{
+                script{
+                    catchError(buildResult: 'SUCCESS', stageResult: 'UNSTABLE'){
+                        sh "/var/lib/jenkins/lib/go-concertctl --image_scan"
+                    }
+                }
+            }
+        }
+        stage('Generate Package SBOM') {
+            steps{
+                script{
+                    catchError(buildResult: 'SUCCESS', stageResult: 'UNSTABLE'){
+                        sh "/var/lib/jenkins/lib/go-concertctl --image"
+                    }
+                }
+            }
+        }
     }
 }
